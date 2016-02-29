@@ -2,6 +2,7 @@
 
 # Version 0.0.2
 
+-- Added error views 404 and 500.
 -- Added user controller.
 -- Changed autoloader structure for exports.
 -- Changed prefix route for static public folder.
