@@ -14,9 +14,8 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/admin/admin-lte/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="/admin/admin-lte/css/skins/_all-skins.min.css">
+    <!-- iCheck -->
+  	<link rel="stylesheet" href="/admin/plugins/iCheck/square/blue.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -24,29 +23,23 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-	<!-- Site wrapper -->
-    <div class="wrapper">
-        {{> page/header }}
-        {{> page/nav }}
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            {{{body}}}
-        </div><!-- /.content-wrapper -->
-        {{> page/control }}
-        {{> page/footer }}
-    </div><!-- ./wrapper -->
-    <!-- jQuery 2.1.4 -->
-    <script src="/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="/admin/bootstrap/js/bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="/admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="/admin/plugins/fastclick/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="/admin/admin-lte/js/app.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="/admin/admin-lte/js/demo.js"></script>
+<body class="hold-transition login-page">
+	{{{body}}}
+
+	<!-- jQuery 2.2.0 -->
+	<script src="/admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+	<!-- Bootstrap 3.3.5 -->
+	<script src="/admin/bootstrap/js/bootstrap.min.js"></script>
+	<!-- iCheck -->
+	<script src="/admin/plugins/iCheck/icheck.min.js"></script>
+	<script>
+	  $(function () {
+	    $('input').iCheck({
+	      checkboxClass: 'icheckbox_square-blue',
+	      radioClass: 'iradio_square-blue',
+	      increaseArea: '20%' // optional
+	    });
+	  });
+	</script>
 </body>
 </html>
