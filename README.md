@@ -19,11 +19,17 @@ Valid options [controller|route|view]
 
 	view
 	  --filename	Path for view file.
+
+## Helpers
+
+* url(routeName, params) returns Path for the routeName
+* activeRoute(routeName) returns ['active'||'']
+* activeRoutes(routeNames) returns ['active'||'']
+* block(name)
+* extend(blockName, context)
 	  
 ## TODO
-* Auth login before
-* DB mongoose
-* Users model
+* Authorization integrated to DB module.
 * CRUD example
 * Generator CRUD
 
