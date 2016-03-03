@@ -1,19 +1,54 @@
 var express      = require('express');
-var handlebars   = require('express-handlebars');
+var exphbs       = require('express-handlebars');
 var path         = require('path');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-var autoloader   = require('./autoloader');
+var Router       = require('named-routes');
+var Autoloader   = require('./lib/autoloader');
 
+// Main App
 var app = express();
+// Config named routes
+var router = new Router();
+router.extendExpress(app);
+router.registerAppHelpers(app);
+// MVC Autoloader
+Autoloader(app, {verbose: module.parent});
+// Config Handlebars
+var blocks = {};
+var Handlebars = exphbs.create({
+  defaultLayout: 'main',
+  helpers      : {
+    url: function(routeName, params) {
+      return app.locals.url(routeName, params);
+    },
+    urlActive: function(routeName) {
+      // TODO
+      return true;
+    },
+    block: function(name) {
+      var val = (blocks[name] || []).join('\n');
 
-// view engine setup
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
-app.set('views', path.join(__dirname, 'views'));
+      // clear the block
+      blocks[name] = [];
+      return val;
+    },
+    extend: function(name, context) {
+      var block = blocks[name];
+      if (!block) {
+          block = blocks[name] = [];
+      }
+
+      block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
+    }
+  }
+});
+// View engine setup
+app.engine('handlebars', Handlebars.engine);
 app.set('view engine', 'handlebars');
-
+app.set('views', path.join(__dirname, 'views'));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -21,9 +56,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/admin', express.static(path.join(__dirname, 'public')));
-
-// Admin autoloader mvc
-app.use(autoloader);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
