@@ -26,5 +26,6 @@ Valid options [controller|route|view]
 * Users model
 * CRUD example
 * Generator CRUD
+
 ## License
 [**GPL-3.0**](https://github.com/RamEduard/admin-lte-express/blob/master/LICENSE.md)
