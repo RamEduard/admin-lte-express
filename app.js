@@ -1,5 +1,6 @@
 var express      = require('express');
 var exphbs       = require('express-handlebars');
+var session      = require('express-session');
 var path         = require('path');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
@@ -7,6 +8,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var Router       = require('named-routes');
 var Autoloader   = require('./lib/autoloader');
+var Auth         = require('./lib/auth').Auth;
+var Errors       = require('./lib/errors');
 
 // Main App
 var app = express();
@@ -14,8 +17,33 @@ var app = express();
 var router = new Router();
 router.extendExpress(app);
 router.registerAppHelpers(app);
+// Config session
+app.use(session({
+  resave: false, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: 'A77as7diubhaisdgibkn!'
+}));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use('/admin', express.static(path.join(__dirname, 'public')));
+
+// Active URL
+var activeUrl = '';
+app.use(function(request, response, next) {
+  var route = router.match(request)
+  if (route) {
+    activeUrl = route.route.options.name
+  }
+  next()
+});
+
 // MVC Autoloader
-Autoloader(app, {verbose: module.parent});
+Autoloader(app, {verbose: !module.parent});
+// Auth load
+Auth.load(app, {verbose: !module.parent})
 // Config Handlebars
 var blocks = {};
 var Handlebars = exphbs.create({
@@ -24,9 +52,12 @@ var Handlebars = exphbs.create({
     url: function(routeName, params) {
       return app.locals.url(routeName, params);
     },
-    urlActive: function(routeName) {
+    activeRoute: function(routeName) {
+      return routeName === activeUrl ? 'active' : '';
+    },
+    activeRoutes: function(routeNames) {
       // TODO
-      return true;
+      return routeNames.split(',').indexOf(activeUrl) >= 0 ? 'active' : '';
     },
     block: function(name) {
       var val = (blocks[name] || []).join('\n');
@@ -50,65 +81,8 @@ app.engine('handlebars', Handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use('/admin', express.static(path.join(__dirname, 'public')));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    var page, title;
-    if (err.status == 404) {
-      page = 'errors/404';
-      title = err.status + ' ' + err.message;
-    }
-    else {
-      page = 'errors/500'
-      title = '500 Internal Server Error'
-    }
-
-    res.status(err.status || 500);
-    res.render(page, {
-      message: err.message,
-      error: err,
-      title: title
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  var page, title;
-  if (err.status == 404) {
-    page = 'errors/404';
-    title = err.status + ' ' + err.message;
-  }
-  else {
-    page = 'errors/500'
-    title = '500 Internal Server Error'
-  }
-
-  res.status(err.status || 500);
-  res.render(page, {
-    message: err.message,
-    error: {},
-    title: title
-  });
-});
-
+// Errors load
+Errors(app);
 
 module.exports = app;
