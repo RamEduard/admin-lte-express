@@ -1,3 +1,7 @@
+exports.prefix = '/dashboard';
+
+exports.before = require('../../lib/auth').Auth.restrict;
+
 exports.index = function(request, response) {
 	response.render('dashboard/index', {
 		title: 'Blank Page'

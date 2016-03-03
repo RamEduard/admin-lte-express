@@ -1,5 +1,7 @@
 exports.prefix = '/user';
 
+exports.before = require('../../lib/auth').Auth.restrict;
+
 exports.lockscreen = function(request, response) {
 	response.render('user/lockscreen', {
 		title: 'Lock Screen',

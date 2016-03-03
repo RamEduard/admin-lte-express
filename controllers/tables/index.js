@@ -1,5 +1,7 @@
 exports.prefix = '/tables';
 
+exports.before = require('../../lib/auth').Auth.restrict;
+
 exports.simple = function(request, response) {
   response.render("tables/simple", {
     title: "Simple"

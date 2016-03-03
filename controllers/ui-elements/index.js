@@ -1,5 +1,7 @@
 exports.prefix = '/ui-elements';
 
+exports.before = require('../../lib/auth').Auth.restrict;
+
 exports.general = function(request, response) {
   response.render("ui-elements/general", {
     title: "General"

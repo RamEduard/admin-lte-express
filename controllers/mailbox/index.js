@@ -1,5 +1,7 @@
 exports.prefix = '/mailbox';
 
+exports.before = require('../../lib/auth').Auth.restrict;
+
 exports.index = function(request, response) {
   response.render("mailbox/index", {
     title: "Mailbox"
