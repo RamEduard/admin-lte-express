@@ -1,25 +1,25 @@
 exports.prefix = '/user';
 
 exports.lockscreen = function(request, response) {
-	response.render('lockscreen', {
+	response.render('user/lockscreen', {
 		title: 'Lock Screen',
 		layout: 'lockscreen'
 	});
 };
 exports.login = function(request, response) {
-	response.render('login', {
+	response.render('user/login', {
 		title: 'Login',
 		layout: 'auth'
 	});
 };
 exports.register = function(request, response) {
-	response.render('register', {
+	response.render('user/register', {
 		title: 'Register',
 		layout: 'auth'
 	});
 };
 exports.profile = function(request, response) {
-	response.render('profile', {
+	response.render('user/profile', {
 		title: 'Profile'
 	});
 };
