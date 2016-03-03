@@ -1,6 +1,6 @@
 {
   "name": "admin-lte-express",
-  "version": "0.0.2",
+  "version": "0.9.0",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www"
@@ -13,6 +13,7 @@
     "express-handlebars": "^3.0.0",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
+    "named-routes": "^2.0.3",
     "serve-favicon": "~2.3.0"
   }
 }
