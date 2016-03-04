@@ -7,43 +7,61 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var Router       = require('named-routes');
-var Autoloader   = require('./lib/autoloader');
+var Autoloader   = require('./lib/autoloader').Autoloader;
 var Auth         = require('./lib/auth').Auth;
+var PassportAuth = require('./lib/passport').Passport;
 var Errors       = require('./lib/errors');
 
 // Main App
 var app = express();
+
 // Config named routes
 var router = new Router();
 router.extendExpress(app);
 router.registerAppHelpers(app);
+
 // Config session
 app.use(session({
   resave: false, // don't save session if unmodified
   saveUninitialized: false, // don't create session until something stored
   secret: 'A77as7diubhaisdgibkn!'
 }));
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Morgarn logger
 app.use(logger('dev'));
+
+// Body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// Cookie parser
 app.use(cookieParser());
+
+// Public assets
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use('/admin', express.static(path.join(__dirname, 'public')));
 
-// Active URL
-var activeUrl = '';
+// Active URL for helper
+var activeRoute = '';
 app.use(function(request, response, next) {
   var route = router.match(request)
   if (route) {
-    activeUrl = route.route.options.name
+    activeRoute = route.route.options.name
   }
   next()
 });
 
+// Auth load and middleware
+Auth.load(app, {verbose: !module.parent});
+app.use(Autoloader.allRoutes(), Auth.restrict)
+
+// Passport load and middleware
+//PassportAuth.load(app, {verbose: !module.parent});
+//app.use(Autoloader.allRoutes(), require('connect-ensure-login').ensureLoggedIn())
+
 // MVC Autoloader
-Autoloader(app, {verbose: !module.parent});
-// Auth load
-Auth.load(app, {verbose: !module.parent})
+Autoloader.load(app, {verbose: !module.parent});
+
 // Config Handlebars
 var blocks = {};
 var Handlebars = exphbs.create({
@@ -53,11 +71,11 @@ var Handlebars = exphbs.create({
       return app.locals.url(routeName, params);
     },
     activeRoute: function(routeName) {
-      return routeName === activeUrl ? 'active' : '';
+      return routeName === activeRoute ? 'active' : '';
     },
     activeRoutes: function(routeNames) {
       // TODO
-      return routeNames.split(',').indexOf(activeUrl) >= 0 ? 'active' : '';
+      return routeNames.split(',').indexOf(activeRoute) >= 0 ? 'active' : '';
     },
     block: function(name) {
       var val = (blocks[name] || []).join('\n');
@@ -76,11 +94,11 @@ var Handlebars = exphbs.create({
     }
   }
 });
+
 // View engine setup
 app.engine('handlebars', Handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
-// uncomment after placing your favicon in /public
 
 // Errors load
 Errors(app);
