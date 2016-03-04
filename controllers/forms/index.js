@@ -1,6 +1,6 @@
 exports.prefix = '/forms';
 
-exports.before = require('../../lib/auth').Auth.restrict;
+//exports.before = require('../../lib/auth').Auth.restrict;
 
 exports.general = function(request, response) {
   response.render("forms/general", {
