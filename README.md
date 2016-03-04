@@ -27,9 +27,16 @@ Valid options [controller|route|view]
 * activeRoutes(routeNames) returns ['active'||'']
 * block(name)
 * extend(blockName, context)
+
+## Authorization
+
+* Passport.js 
+  - Uncomment Lines 59 and 60 for use this auth.
+* Custom Auth express.js (Default)
+  - Uncomment Lines 55 and 56 for use this auth.
 	  
 ## TODO
-* Authorization integrated to DB module.
+* Authorization with Facebook and Google with Passport.js
 * CRUD example
 * Generator CRUD
 

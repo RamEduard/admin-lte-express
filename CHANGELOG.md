@@ -1,3 +1,8 @@
+# Version 1.1.0
+
+* Authorization with [Passport.js](http://passportjs.org)
+* Authorization integrated to DB module.
+
 # Version 1.0.0
 
 * Authorization module added.
