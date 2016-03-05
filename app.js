@@ -3,6 +3,7 @@ var exphbs       = require('express-handlebars');
 var session      = require('express-session');
 var path         = require('path');
 var favicon      = require('serve-favicon');
+var methodOver   = require('method-override');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
@@ -32,7 +33,10 @@ app.use(logger('dev'));
 
 // Body parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// allow overriding methods in query (?_method=put)
+app.use(methodOver('_method'));
 
 // Cookie parser
 app.use(cookieParser());
@@ -52,11 +56,11 @@ app.use(function(request, response, next) {
 });
 
 // Auth load and middleware
-Auth.load(app, {verbose: !module.parent});
+Auth.load(app);
 app.use(Autoloader.allRoutes(), Auth.restrict)
 
 // Passport load and middleware
-//PassportAuth.load(app, {verbose: !module.parent});
+//PassportAuth.load(app);
 //app.use(Autoloader.allRoutes(), require('connect-ensure-login').ensureLoggedIn())
 
 // MVC Autoloader
