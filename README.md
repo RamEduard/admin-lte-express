@@ -47,6 +47,7 @@ Valid options [controller|route|view]
   - Uncomment Lines 55 and 56 for use this auth.
 	  
 ## TODO
+* Register user for login
 * Authorization with Facebook and Google with Passport.js
 * CRUD example
 
