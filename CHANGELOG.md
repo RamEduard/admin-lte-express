@@ -1,3 +1,8 @@
+# Version 1.2.0
+
+* Method override added.
+* Generator CRUD. 
+
 # Version 1.1.0
 
 * Authorization with [Passport.js](http://passportjs.org)

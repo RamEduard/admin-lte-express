@@ -14,6 +14,7 @@
     "express": "~4.13.1",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.13.0",
+    "method-override": "^2.3.5",
     "mongoose": "^4.4.6",
     "morgan": "~1.6.1",
     "named-routes": "^2.0.3",
