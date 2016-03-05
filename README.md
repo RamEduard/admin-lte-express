@@ -5,6 +5,10 @@ AdminLTE 2.3.2 with express and express-handlebars.
 **git clone**
 https://github.com/RamEduard/admin-lte-express.git
 
+## Install 
+
+npm install admin-lte-express
+
 ## Generator
 **./bin/generate**
 Valid options [controller|route|view]
@@ -38,7 +42,6 @@ Valid options [controller|route|view]
 ## TODO
 * Authorization with Facebook and Google with Passport.js
 * CRUD example
-* Generator CRUD
 
 ## License
 [**GPL-3.0**](https://github.com/RamEduard/admin-lte-express/blob/master/LICENSE.md)
