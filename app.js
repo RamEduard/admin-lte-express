@@ -70,7 +70,9 @@ Autoloader.load(app, {verbose: !module.parent});
 var blocks = {};
 var Handlebars = exphbs.create({
   defaultLayout: 'main',
-  helpers      : {
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/',
+  helpers: {
     url: function(routeName, params) {
       return app.locals.url(routeName, params);
     },
@@ -102,7 +104,7 @@ var Handlebars = exphbs.create({
 // View engine setup
 app.engine('handlebars', Handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', __dirname + '/views');
 
 // Errors load
 Errors(app);

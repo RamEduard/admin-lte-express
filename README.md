@@ -7,7 +7,14 @@ https://github.com/RamEduard/admin-lte-express.git
 
 ## Install 
 
-npm install admin-lte-express
+npm install admin-lte-express --save
+
+## Config on Express App
+
+```js
+app.use('/admin', express.static('./node_modules/admin-lte-express/public'))
+app.use('/', require('admin-lte-express'));
+```
 
 ## Generator
 **./bin/generate**

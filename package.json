@@ -5,6 +5,9 @@
   "scripts": {
     "start": "nodemon ./bin/www"
   },
+  "bin": {
+    "generate": "./bin/generate"
+  },
   "dependencies": {
     "body-parser": "~1.13.2",
     "connect-ensure-login": "^0.1.1",
@@ -30,7 +33,7 @@
     "url": "git+https://github.com/RamEduard/admin-lte-express.git"
   },
   "keywords": [
-    "admin-lte-express"
+    "admin-lte-express", "express-admin", "admin"
   ],
   "author": "Ramón Serrano <ramon.calle.88@gmail.com>",
   "license": "GPL-3.0",
