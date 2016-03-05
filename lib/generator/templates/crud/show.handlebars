@@ -1,0 +1,13 @@
+<h1>{{__modelName__.name}} 
+  <a href="/__crudName__/__crudName__/{{__modelName__.id}}/edit">Edit</a> 
+</h1>
+
+<p><b>Name: </b>{{__modelName__.name}}</p>
+
+{{#if hasMessages}}
+  <ul id="messages">
+    {{#each msg in messages}}
+      <li>{{msg}}</li>
+    {{/each}}
+  </ul>
+{{/if}}

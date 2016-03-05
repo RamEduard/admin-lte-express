@@ -1,0 +1,60 @@
+var __modelName__ = [{name:"name", id:1}, {name:"name2", id:2}];
+
+exports.prefix = "/__crudName__";
+
+exports.name = "__crudName__";
+
+exports.engine = "__viewExt__";
+
+exports.before = function(request, response, next) {
+  var id = request.params._id;
+  if (!id) return next();
+  // pretend to query a database...
+  process.nextTick(function() {
+    request.var_name = __modelName__[id-1];
+    // cant find that __modelName__
+    if (!request.var_name) return next("route");
+    // found it, move on to the routes
+    next();
+  });
+};
+
+exports.index = function(request, response) {
+  response.redirect('/__crudName__/__crudName__s');  
+};
+
+exports.list = function(request, response) {
+  response.render("__crudName__/list", { __modelName__: __modelName__ });
+};
+
+exports.new = function(request, response) {
+  response.render("__crudName__/new");
+};
+
+exports.create = function(request, response) {
+  var body     = request.body,
+      var_name = {};
+
+  var_name.id   = Math.floor(100000 + Math.random() * 900000).toString().substring(0, 4);
+  var_name.name = body.var_name;
+
+  // Save 
+  __modelName__.push(var_name);
+
+  response.message("__modelName__ created!");
+  response.redirect("/__crudName__/" + var_name.id);
+};
+
+exports.edit = function(request, response) {
+  response.render("__crudName__/edit", { __modelName__: request.var_name });
+};
+
+exports.show = function(request, response) {
+  response.render("__crudName__/show", { __modelName__: request.var_name });
+};
+
+exports.update = function(request, response) {
+  var body = request.body;
+  request.var_name.name = body.var_name.name;
+  response.redirect("/__crudName__/__crudName__/" + request.var_name.id);
+};
