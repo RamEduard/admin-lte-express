@@ -1,3 +1,8 @@
+# Version 1.3.2
+
+* Removed nextTick functions form DB module.
+* Change redirect route on post login.
+
 # Version 1.3.1
 
 * Updated DB module.
