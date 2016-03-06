@@ -179,36 +179,17 @@
                 </li>
               </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview {{{activeRoutes 'user.list,user.show,user.edit,user.mew'}}}">
               <a href="#">
-                <i class="fa fa-share"></i> <span>Multilevel</span>
+                <i class="fa fa-share"></i> <span>CRUD User</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level One</a>
+                <li class="{{{activeRoute 'user.new'}}}">
+                  <a href="{{{url 'user.new'}}}"><i class="fa fa-circle-o"></i> New User</a>
                 </li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                  <ul class="treeview-menu">
-                    <li>
-                      <a href="#"><i class="fa fa-circle-o"></i> Level Two</a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                      <ul class="treeview-menu">
-                        <li>
-                          <a href="#"><i class="fa fa-circle-o"></i> Level Three</a>
-                        </li>
-                        <li>
-                          <a href="#"><i class="fa fa-circle-o"></i> Level Three</a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level One</a>
+                <li class="{{{activeRoute 'user.list'}}}">
+                  <a href="{{{url 'user.list'}}}"><i class="fa fa-circle-o"></i> List Users</a>
                 </li>
               </ul>
             </li>

@@ -1,0 +1,6 @@
+<h1>Edit crud_user</h1>
+<form action="/crud/user/{{crud_user.id}}?_method=put" method="post">
+  <label for="name">Name: </label>
+  <input id="name" name="var_name[displayName]" value="{{crud_user.displayName}}" />
+  <input type="submit" value="Update" />
+</form>

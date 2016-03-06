@@ -1,0 +1,8 @@
+<h1>crud-user</h1>
+<ul>
+    {{#each crud_user }} 
+        <li>
+            <a href="/crud/user/{{this.id}}">{{this.displayName}}</a>
+        </li>
+    {{/each}}
+</ul>
