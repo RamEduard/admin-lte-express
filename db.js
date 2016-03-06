@@ -41,23 +41,19 @@ this.getUsers(function(err, results) {
 });
 
 exports.findById = function(id, cb) {
-  process.nextTick(function() {
-    for (var i = 0, len = users.length; i < len; i++) {
-      if (users[i].id === id) {
-        return cb(null, users[i]);
-      }
+  for (var i = 0, len = users.length; i < len; i++) {
+    if (users[i].id === id) {
+      return cb(null, users[i]);
     }
-    return cb(new Error('User ' + id + ' does not exist'));
-  });
+  }
+  return cb(new Error('User ' + id + ' does not exist'));
 };
 
 exports.findByUsername = function(username, cb) {
-  process.nextTick(function() {
-    for (var i = 0, len = users.length; i < len; i++) {
-      if (users[i].username === username) {
-        return cb(null, users[i]);
-      }
+  for (var i = 0, len = users.length; i < len; i++) {
+    if (users[i].username === username) {
+      return cb(null, users[i]);
     }
-    return cb(null, null);
-  });
-}
+  }
+  return cb(null, null);
+};
