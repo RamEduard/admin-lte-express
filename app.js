@@ -12,6 +12,7 @@ var Autoloader   = require('./lib/autoloader').Autoloader;
 var Auth         = require('./lib/auth').Auth;
 var PassportAuth = require('./lib/passport').Passport;
 var Errors       = require('./lib/errors');
+var db           = require('./db');
 
 // Main App
 var app = express();
@@ -55,6 +56,18 @@ app.use(function(request, response, next) {
   next()
 });
 
+// Session-persisted message middleware
+app.use(function(req, res, next) {
+  var err = req.session.error;
+  var msg = req.session.success;
+  delete req.session.error;
+  delete req.session.success;
+  res.locals.message = '';
+  if (err) res.locals.message = '<p class="msg error">' + err + '</p>';
+  if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
+  next();
+});
+
 // Auth load and middleware
 Auth.load(app);
 app.use(Autoloader.allRoutes(), Auth.restrict)
@@ -62,6 +75,33 @@ app.use(Autoloader.allRoutes(), Auth.restrict)
 // Passport load and middleware
 //PassportAuth.load(app);
 //app.use(Autoloader.allRoutes(), require('connect-ensure-login').ensureLoggedIn())
+
+// Register route
+app.get('/register', 'register', function(req, res) {
+  res.render( 'user/register', {
+    title: 'Register',
+    layout: 'auth'
+  });
+});
+app.post('/register', function(req, res) {
+  var body = req.body;
+  if (body.user) {
+    var User = new db.User({
+      id: Math.floor(100000 + Math.random() * 900000).toString().substring(0,4),
+      username: body.user.username,
+      password: body.user.password,
+      displayName: body.user.name,
+      emails: [{value: body.user.email}]
+    });
+    User.save(function(err) {
+       if (err) req.session.error = err.message;
+       else req.session.success = 'User saved successfuly!';
+       res.redirect('/register');
+    });
+  } else {
+    res.redirect('/register');
+  }
+});
 
 // MVC Autoloader
 Autoloader.load(app, {verbose: !module.parent});
