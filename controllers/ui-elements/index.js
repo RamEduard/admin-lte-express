@@ -1,6 +1,6 @@
 exports.prefix = '/ui-elements';
 
-//exports.before = require('../../lib/auth').Auth.restrict;
+//exports.before = function(request, response, next) { next() };
 
 exports.general = function(request, response) {
   response.render("ui-elements/general", {

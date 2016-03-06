@@ -1,6 +1,6 @@
 exports.prefix = '/dashboard';
 
-//exports.before = require('../../lib/auth').Auth.restrict;
+//exports.before = function(request, response, next) { next() };
 
 exports.index = function(request, response) {
 	response.render('dashboard/index', {
