@@ -1,3 +1,9 @@
+# Version 1.3.0
+
+* Register Users integrated with DB module.
+* Register Users route moved from Custom Auth and Passport.js to app.js.
+* Removed before Auth restrict of controllers.
+
 # Version 1.2.0
 
 * Method override added.

@@ -2,7 +2,7 @@
 
 AdminLTE 2.3.2 with express and express-handlebars.
 
-**git clone**
+**git clone** (Recomended)
 https://github.com/RamEduard/admin-lte-express.git
 
 ## Install 
@@ -18,7 +18,10 @@ app.use('/', require('admin-lte-express'));
 
 ## Generator
 **./bin/generate**
-Valid options [controller|route|view]
+Valid options [crud|controller|route|view]
+ 
+  crud
+	  --name	Name of CRUD. Ex.: crud-user
 
 	controller
 	  --name	Name of controller. Ex.: user
@@ -42,12 +45,12 @@ Valid options [controller|route|view]
 ## Authorization
 
 * Passport.js 
-  - Uncomment Lines 59 and 60 for use this auth.
+  - Uncomment Lines 72 and 73 for use this auth.
 * Custom Auth express.js (Default)
-  - Uncomment Lines 55 and 56 for use this auth.
+  - Uncomment Lines 76 and 77 for use this auth.
 	  
 ## TODO
-* Register user for login
+
 * Authorization with Facebook and Google with Passport.js
 * CRUD example
 
