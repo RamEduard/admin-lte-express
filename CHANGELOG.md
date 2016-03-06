@@ -1,3 +1,7 @@
+# Version 1.3.1
+
+* Updated DB module.
+
 # Version 1.3.0
 
 * Register Users integrated with DB module.

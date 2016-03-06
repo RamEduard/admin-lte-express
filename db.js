@@ -2,7 +2,9 @@ var mongoose = require('mongoose'),
     Schema   = mongoose.Schema;
 
 // Uncomment for use mongo database
-//mongoose.connect('mongodb://localhost:27017/admin-lte-express');
+mongoose.connect('mongodb://localhost:27017/admin-lte-express', function(err) {
+  if (err) console.log(err);
+});
 
 // Users Model
 var usersSchema = new Schema({
@@ -40,21 +42,20 @@ this.getUsers(function(err, results) {
 
 exports.findById = function(id, cb) {
   process.nextTick(function() {
-    var idx = id - 1;
-    if (users[idx]) {
-      cb(null, users[idx]);
-    } else {
-      cb(new Error('User ' + id + ' does not exist'));
+    for (var i = 0, len = users.length; i < len; i++) {
+      if (users[i].id === id) {
+        return cb(null, users[i]);
+      }
     }
+    return cb(new Error('User ' + id + ' does not exist'));
   });
-}
+};
 
 exports.findByUsername = function(username, cb) {
   process.nextTick(function() {
     for (var i = 0, len = users.length; i < len; i++) {
-      var user = users[i];
-      if (user.username === username) {
-        return cb(null, user);
+      if (users[i].username === username) {
+        return cb(null, users[i]);
       }
     }
     return cb(null, null);
