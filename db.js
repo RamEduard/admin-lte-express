@@ -1,8 +1,10 @@
-var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema;
+var mongoose  = require('mongoose'),
+    Schema    = mongoose.Schema,
+    urlMLab   = 'mongodb://RamEduard:MongoLab01$@ds043012.mlab.com:43012/heroku_meteor',
+    urlMLocal = 'mongodb://localhost:27017/admin-lte-express';
 
 // Uncomment for use mongo database
-mongoose.connect('mongodb://localhost:27017/admin-lte-express', function(err) {
+mongoose.connect(urlMLab, function(err) {
   if (err) console.log(err);
 });
 
