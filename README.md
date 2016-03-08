@@ -20,7 +20,7 @@ app.use('/', require('admin-lte-express'));
 **./bin/generate**
 Valid options [crud|controller|route|view]
  
-  crud
+	crud
 	  --name	Name of CRUD. Ex.: crud-user
 
 	controller
