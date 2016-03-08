@@ -1,3 +1,7 @@
+# Version 1.3.3
+
+* Updated README.md
+
 # Version 1.3.2
 
 * Removed nextTick functions form DB module.

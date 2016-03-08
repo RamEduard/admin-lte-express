@@ -1,8 +1,9 @@
-var mongoose = require('mongoose'),
-    Schema   = mongoose.Schema;
+var mongoose  = require('mongoose'),
+    Schema    = mongoose.Schema,
+    urlMLocal = 'mongodb://localhost:27017/admin-lte-express';
 
 // Uncomment for use mongo database
-mongoose.connect('mongodb://localhost:27017/admin-lte-express', function(err) {
+mongoose.connect(urlMLocal, function(err) {
   if (err) console.log(err);
 });
 
