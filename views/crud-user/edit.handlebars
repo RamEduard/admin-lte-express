@@ -1,6 +1,56 @@
-<h1>Edit crud_user</h1>
-<form action="/crud/user/{{crud_user.id}}?_method=put" method="post">
-  <label for="name">Name: </label>
-  <input id="name" name="var_name[displayName]" value="{{crud_user.displayName}}" />
-  <input type="submit" value="Update" />
-</form>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Edit User
+    <small>Edit User info</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="{{{url 'dashboard.v1'}}}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="{{{url 'user.list'}}}">List</a></li>
+    <li class="active">Edit User</li>
+  </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Input addon -->
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">User Info</h3>
+        </div>
+        <!-- form -->
+        <form action="/crud/user/{{crud_user.id}}?_method=put" method="post">
+          <div class="box-body">
+          	{{#if hasMessages}}
+			        <ul id="messages">
+			          {{#each msg in messages}}
+			            <li>{{msg}}</li>
+			          {{/each}}
+			        </ul>
+			      {{/if}}
+            <div class="form-group has-feedback">
+              <input type="text" class="form-control" name="user[displayName]" placeholder="Display Name" value="{{crud_user.displayName}}" required/>
+              <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+              <input type="text" class="form-control" name="user[username]" placeholder="Username" value="{{crud_user.username}}" readonly="true" />
+              <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-default" onclick="location.href = '{{{url "user.list"}}}'">Cancel</button>
+          </div>
+          <!-- /.box-footer -->
+        </form>
+        <!-- /form -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!-- /.col-md-6 -->
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.section -->

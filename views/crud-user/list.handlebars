@@ -1,8 +1,98 @@
-<h1>crud-user</h1>
-<ul>
-    {{#each crud_user }} 
-        <li>
-            <a href="/crud/user/{{this.id}}">{{this.displayName}}</a>
-        </li>
-    {{/each}}
-</ul>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    List Users
+    <small>All users listed</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="{{{url 'dashboard.v1'}}}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">List</li>
+  </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">All users</h3>
+
+          <div class="box-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+
+              <div class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover">
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Display Name</th>
+              <th>Emails</th>
+              <th>Actions</th>
+            </tr>
+            {{#each crud_user }}
+              <tr>
+                <td>
+                  <a href="/crud/user/{{this.id}}">
+                    {{this.id}}
+                  </a>
+                </td>
+                <td>
+                  <a href="/crud/user/{{this.id}}">
+                    {{this.username}}
+                  </a>
+                </td>
+                <td>{{this.displayName}}</td>
+                <td>
+                  {{#each this.emails}}
+                    <li>{{this.value}}</li>
+                  {{/each}}
+                </td>
+                <td>
+                  <a href="/crud/user/{{this.id}}" class="btn btn-xs btn-info">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    Show
+                  </a>
+                  <a href="/crud/user/{{this.id}}/edit" class="btn btn-xs btn-success">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    Edit
+                  </a>
+                  <a href="#" class="btn btn-xs btn-danger" data-href="/crud/user/{{this.id}}?_method=delete">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    Delete
+                  </a>
+                </td>
+              </tr>
+            {{/each}}
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+  <!-- /.row -->
+</section>
+<!-- /.section -->
+{{#extend 'scripts'}}
+  <script>
+    (function($) {
+      $('.btn-danger').click(function(event) {
+        event.preventDefault();
+
+        var uri = $(this).attr('data-href');
+
+        $.post(uri, function(response) {
+          window.location.href = '/crud/users';
+        });
+      });
+    })(jQuery)
+  </script>
+{{/extend}}

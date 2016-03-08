@@ -22,48 +22,88 @@ exports.index = function(request, response) {
 
 exports.list = function(request, response) {
   db.User.find().exec(function(err, results) {
-    response.render("crud-user/list", { crud_user: results });
+    response.render("crud-user/list", {
+      title: 'List Users',
+      crud_user: results
+    });
   });
 };
 
 exports.new = function(request, response) {
-  response.render("crud-user/new");
+  response.render("crud-user/new", {
+    title: 'New User'
+  });
 };
 
 exports.create = function(request, response) {
   var user = request.body.user;
   
-  var User = new db.User({
-    id: Math.floor(100000 + Math.random() * 900000).toString().substring(0, 4),
-    username: user.username,
-    password: user.password,
-    displayName: user.displayName,
-    emails: [{ value: user.email }]
-  });
+  if (user) {
+    var User = new db.User({
+      id: Math.floor(100000 + Math.random() * 900000).toString().substring(0, 4),
+      username: user.username,
+      password: user.password,
+      displayName: user.displayName,
+      emails: [{ value: user.email }]
+    });
+  
+    // Save 
+    User.save(function(err) {
+      if (err) {
+        request.session.error = err.message;
+        reponse.redirect('back');
+      }
+      
+      request.session.success = 'User created succesfuly!';
+      response.redirect("/crud/user/" + User.id);
+    });
+  } else {
+    response.redirect('/crud/users');
+  }
+};
 
-  // Save 
-  User.save(function(err) {
-    if (err) {
-      request.session.error = err.message;
-      reponse.redirect('back');
-    }
-    
-    request.sesion.success = 'User created succesfuly!';
-    response.redirect("/crud/user/" + var_name.id);
+exports.show = function(request, response) {
+  response.render("crud-user/show", {
+    title: 'Show User',
+    crud_user: request.var_name 
   });
 };
 
 exports.edit = function(request, response) {
-  response.render("crud-user/edit", { crud_user: request.var_name });
-};
-
-exports.show = function(request, response) {
-  response.render("crud-user/show", { crud_user: request.var_name });
+  response.render("crud-user/edit", {
+    title: 'Edit User',
+    crud_user: request.var_name 
+  });
 };
 
 exports.update = function(request, response) {
   var user = request.body.user;
   
-  request.var_name.name = user.displayName;
-  response.redirect("/crud/user/" + request.var_name.id);
+  request.var_name.displayName = user.displayName;
+
+  db.User.findOneAndRemove({_id: request.var_name._id}, request.var_name, function(err) {
+    if (err) {
+      request.session.error = 'Error updating delete user!';
+    } else {
+      request.session.success = 'User updated succesfuly!';
+    }
+  });
+
+  response.redirect("/crud/user/" + request.var_name.id + "/edit");
+};
+
+exports.delete = function(request, response) {
+  var result = '';
+
+  db.User.findOneAndRemove({_id: request.var_name._id}, function(err) {
+    if (err) {
+      request.session.error = 'Error trying delete user!';
+      result = err.message
+    } else {
+      request.session.success = 'User deleted succesfuly!';
+      result = 'Deleted'
+    }
+
+    response.json({ result: result });
+  });
 };
