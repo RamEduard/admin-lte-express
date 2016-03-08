@@ -1,3 +1,8 @@
+# Version 1.4.0
+
+* Example CRUD User added.
+* Route remove and delete defaults on Autoloader module.
+
 # Version 1.3.3
 
 * Updated README.md

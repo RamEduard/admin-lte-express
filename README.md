@@ -61,7 +61,6 @@ Valid options [crud|controller|route|view]
 ## TODO
 
 * Authorization with Facebook and Google with Passport.js
-* CRUD example
 
 ## License
 [**GPL-3.0**](https://github.com/RamEduard/admin-lte-express/blob/master/LICENSE.md)
