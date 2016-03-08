@@ -2,7 +2,14 @@
 
 AdminLTE 2.3.2 with express and express-handlebars.
 
+**Dashboard V1**
 <img src="https://raw.githubusercontent.com/RamEduard/admin-lte-express/master/public/readme/dashboard.v1.png">
+**Dashboard V2**
+<img src="https://raw.githubusercontent.com/RamEduard/admin-lte-express/master/public/readme/dashboard.v2.png">
+**Dashboard Login**
+<img src="https://raw.githubusercontent.com/RamEduard/admin-lte-express/master/public/readme/login.png">
+**Dashboard Register**
+<img src="https://raw.githubusercontent.com/RamEduard/admin-lte-express/master/public/readme/register.png">
 
 **git clone** (Recomended)
 https://github.com/RamEduard/admin-lte-express.git
