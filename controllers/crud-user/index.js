@@ -81,7 +81,7 @@ exports.update = function(request, response) {
   
   request.var_name.displayName = user.displayName;
 
-  db.User.findOneAndRemove({_id: request.var_name._id}, request.var_name, function(err) {
+  db.User.findOneAndUpdate({_id: request.var_name._id}, request.var_name, function(err) {
     if (err) {
       request.session.error = 'Error updating delete user!';
     } else {
