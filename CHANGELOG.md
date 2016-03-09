@@ -1,3 +1,7 @@
+# Version 1.4.2
+
+* Updated CRUD User.
+
 # Version 1.4.1
 
 * Route 'update' updated.

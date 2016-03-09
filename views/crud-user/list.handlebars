@@ -1,3 +1,13 @@
+{{#extend 'styles'}}
+  <style>
+    .error {
+      color: red;
+    }
+    .success {
+      color:green;
+    }
+  </style>
+{{/extend}}
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
@@ -13,16 +23,18 @@
 <section class="content">
   <div class="row">
     <div class="col-xs-12">
+      {{#if message}}
+        {{{message}}}
+      {{/if}}
       <div class="box">
         <div class="box-header">
           <h3 class="box-title">All users</h3>
-
           <div class="box-tools">
             <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+              <input type="text" id="table-search" class="form-control pull-right" placeholder="Search">
 
               <div class="input-group-btn">
-                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                <button type="button" class="btn btn-default search"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </div>
@@ -57,7 +69,7 @@
                 </td>
                 <td>
                   <a href="/crud/user/{{this.id}}" class="btn btn-xs btn-info">
-                    <i class="glyphicon glyphicon-pencil"></i>
+                    <i class="glyphicon glyphicon-eye-open"></i>
                     Show
                   </a>
                   <a href="/crud/user/{{this.id}}/edit" class="btn btn-xs btn-success">
@@ -84,14 +96,17 @@
 {{#extend 'scripts'}}
   <script>
     (function($) {
+      // Delete user button
       $('.btn-danger').click(function(event) {
         event.preventDefault();
 
         var uri = $(this).attr('data-href');
-
-        $.post(uri, function(response) {
-          window.location.href = '/crud/users';
-        });
+        
+        if (confirm('¿Desea eliminar el usuario?')) {
+          $.post(uri, function(response) {
+            window.location.href = '/crud/users';
+          });
+        }
       });
     })(jQuery)
   </script>

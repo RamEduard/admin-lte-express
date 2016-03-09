@@ -1,3 +1,13 @@
+{{#extend 'styles'}}
+  <style>
+    .error {
+      color: red;
+    }
+    .success {
+      color: green;
+    }
+  </style>
+{{/extend}}
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
@@ -14,7 +24,9 @@
 <section class="content">
   <div class="row">
     <div class="col-md-6">
-      <!-- Input addon -->
+      {{#if message}}
+        {{{message}}}
+      {{/if}}
       <div class="box box-info">
         <div class="box-header with-border">
           <h3 class="box-title">User Info</h3>
@@ -22,13 +34,6 @@
         <!-- form -->
         <form action="/crud/user/{{crud_user.id}}?_method=put" method="post">
           <div class="box-body">
-          	{{#if hasMessages}}
-			        <ul id="messages">
-			          {{#each msg in messages}}
-			            <li>{{msg}}</li>
-			          {{/each}}
-			        </ul>
-			      {{/if}}
             <div class="form-group has-feedback">
               <input type="text" class="form-control" name="user[displayName]" placeholder="Display Name" value="{{crud_user.displayName}}" required/>
               <span class="glyphicon glyphicon-user form-control-feedback"></span>
