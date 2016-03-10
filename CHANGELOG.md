@@ -1,3 +1,7 @@
+# Version 1.4.3
+
+* Updated CRUD User controller.
+
 # Version 1.4.2
 
 * Updated CRUD User.

@@ -87,9 +87,8 @@ exports.update = function(request, response) {
     } else {
       request.session.success = 'User updated succesfuly!';
     }
+    response.redirect("/crud/user/" + request.var_name.id + "/edit");
   });
-
-  response.redirect("/crud/user/" + request.var_name.id + "/edit");
 };
 
 exports.delete = function(request, response) {
