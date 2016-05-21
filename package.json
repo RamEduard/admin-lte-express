@@ -22,6 +22,9 @@
     "named-routes": "^2.0.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1",
     "serve-favicon": "~2.3.0"
   },
   "description": "AdminLTE 2.3.2 with express and express-handlebars.",
@@ -32,7 +35,9 @@
     "url": "git+https://github.com/RamEduard/admin-lte-express.git"
   },
   "keywords": [
-    "admin-lte-express", "express-admin", "admin"
+    "admin-lte-express",
+    "express-admin",
+    "admin"
   ],
   "author": "Ramón Serrano <ramon.calle.88@gmail.com>",
   "license": "GPL-3.0",
