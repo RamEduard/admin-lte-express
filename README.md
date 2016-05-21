@@ -18,6 +18,14 @@ https://github.com/RamEduard/admin-lte-express.git
 
 npm install admin-lte-express --save
 
+## MongoDB
+
+[How to install MongoDB Comunity Edition](https://docs.mongodb.com/manual/administration/install-community/)
+
+## Runs mongod
+
+[Official site - How to runs mongodb](https://docs.mongodb.com/v3.0/tutorial/install-mongodb-on-linux/#run-mongodb)
+
 ## Config on Express App
 
 ```js
