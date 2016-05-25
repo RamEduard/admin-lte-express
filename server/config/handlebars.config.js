@@ -25,6 +25,10 @@ function configActiveRoute(expressApp) {
     // Get named router
     var router = expressApp.get('router');
 
+    if (router === undefined) {
+        return;
+    }
+
     expressApp.use(function(request, response, next) {
         var route = router.match(request)
         if (route) {

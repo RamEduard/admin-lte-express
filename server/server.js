@@ -7,9 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 var Router       = require('named-routes');
 var SECRET_KEY   = require('./config/env.config').secret_key;
-var adminLoader  = require('./admin-routes/autoloader'),
-    AdminLoader  = new adminLoader();
-var AuthLoader   = require('./lib/auth').Auth;
 var Handlebars   = require('./config/handlebars.config');
 var Errors       = require('./errors');
 var app          = express();
@@ -40,7 +37,6 @@ app.use(methodOver('_method'));
 app.use(cookieParser());
 
 // Public assets
-app.use('/dist', express.static(path.join(__dirname, '../public')));
 app.use('/admin', express.static(path.join(__dirname, '../public')));
 
 // Session-persisted message middleware
@@ -54,6 +50,10 @@ app.use(function(req, res, next) {
     if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
     next();
 });
+
+var adminLoader = require('./admin-routes/autoloader'),
+    AdminLoader = new adminLoader(),
+    AuthLoader  = require('./lib/auth').Auth;
 
 // Authorization
 AuthLoader.loadRoutes(app);
@@ -70,7 +70,7 @@ var routesLoader = require('./routes/autoloader'),
 
 RoutesLoader.loadRoutes(app, {
     verbose: (process.env.NODE_ENV !== 'production')
-})
+});
 
 // Config Handlebars
 Handlebars(app, __dirname + '/views');

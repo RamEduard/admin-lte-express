@@ -1,6 +1,6 @@
 # admin-lte-express
 
-AdminLTE 2.3.2 with express and express-handlebars.
+AdminLTE 2.3.2 with express, express-handlebars and ReactJS components.
 
 **Dashboard V1**
 <img src="https://raw.githubusercontent.com/RamEduard/admin-lte-express/master/public/readme/dashboard.v1.png">
