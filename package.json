@@ -2,7 +2,8 @@
   "name": "admin-lte-express",
   "version": "1.4.2",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/server",
+    "server": "node ./bin/server"
   },
   "bin": {
     "generate": "./bin/generate"
@@ -19,12 +20,14 @@
     "method-override": "^2.3.5",
     "mongoose": "^4.4.6",
     "morgan": "~1.6.1",
+    "mysql": "^2.10.2",
     "named-routes": "^2.0.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
+    "sequelize": "^3.23.2",
     "serve-favicon": "~2.3.0"
   },
   "description": "AdminLTE 2.3.2 with express and express-handlebars.",

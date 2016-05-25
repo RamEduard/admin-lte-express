@@ -4,15 +4,16 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../server/server');
 var debug = require('debug')('admin-lte-express:server');
 var http = require('http');
+var config = require('../server/config/env.config');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || config.port);
 app.set('port', port);
 
 /**
@@ -87,4 +88,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log('Listening on port ' + addr.port + ' ' + 'from ' + config.environment + ' environment');
 }

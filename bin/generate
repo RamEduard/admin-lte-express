@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-var generate = require('../lib/generator');
+var generate = require('../server/lib/generator');

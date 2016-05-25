@@ -1,0 +1,13 @@
+{
+  "environment": "production",
+  "port": 8080,
+  "database": {
+    "dialect": "mysql",
+    "nameDB": "heropay",
+    "userDB": "root",
+    "passDB": "pass",
+    "hostDB": "localhost",
+    "portDB": 3306
+  },
+  "secret_key": "production_key"
+}

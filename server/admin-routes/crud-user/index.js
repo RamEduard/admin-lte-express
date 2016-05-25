@@ -1,4 +1,4 @@
-var db = require('../../db');
+var db = require('../../config/mongo.db');
 
 exports.prefix = "/crud";
 

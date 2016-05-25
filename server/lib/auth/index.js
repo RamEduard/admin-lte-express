@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 var hash = require('./pass').hash,
-    db   = require('../../db');
+    db   = require('../../config/mongo.db');
 
 var Auth = exports.Auth = {};
 
@@ -31,7 +31,7 @@ Auth.restrict = function(req, res, next) {
   }
 }
 
-Auth.load = function(parentApp) {
+Auth.loadRoutes = function(parentApp) {
 
   // when you create a user, generate a salt
   // and hash the password ('foobar' is the pass here)
@@ -84,5 +84,32 @@ Auth.load = function(parentApp) {
         res.redirect('/login');
       }
     });
+  });
+
+  // Register route
+  parentApp.get('/register', 'register', function(req, res) {
+    res.render( 'user/register', {
+      title: 'Register',
+      layout: 'auth'
+    });
+  });
+  parentApp.post('/register', function(req, res) {
+    var body = req.body;
+    if (body.user) {
+      var User = new db.User({
+        id: Math.floor(100000 + Math.random() * 900000).toString().substring(0,4),
+        username: body.user.username,
+        password: body.user.password,
+        displayName: body.user.name,
+        emails: [{value: body.user.email}]
+      });
+      User.save(function(err) {
+        if (err) req.session.error = err.message;
+        else req.session.success = 'User saved successfuly!';
+        res.redirect('/register');
+      });
+    } else {
+      res.redirect('/register');
+    }
   });
 };

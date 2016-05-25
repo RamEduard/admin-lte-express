@@ -1,5 +1,5 @@
 var fs      = require('fs'),
-    viewExt = require('../../app').get('view engine');
+    viewExt = require('../../server').get('view engine');
 
 var dirCtrls = __dirname + '/../../controllers/',
     dirViews = __dirname + '/../../views/';

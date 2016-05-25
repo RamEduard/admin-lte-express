@@ -1,0 +1,13 @@
+{
+  "environment": "development",
+  "port": 3000,
+  "database": {
+    "dialect": "mysql",
+  	"nameDB": "hpdatabase",
+	"userDB": "root",
+	"passDB": "root",
+	"hostDB": "localhost",
+	"portDB": 3306
+  },
+  "secret_key": "development_key"
+}
