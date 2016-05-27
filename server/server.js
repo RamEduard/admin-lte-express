@@ -37,7 +37,7 @@ app.use(methodOver('_method'));
 app.use(cookieParser());
 
 // Public assets
-app.use('/', express.static(path.join(__dirname, '../public')));
+app.use('/dist', express.static(path.join(__dirname, '../public')));
 app.use('/admin', express.static(path.join(__dirname, '../public')));
 
 // Session-persisted message middleware
