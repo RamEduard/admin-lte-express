@@ -2,7 +2,7 @@
   "name": "admin-lte-express",
   "version": "1.4.2",
   "scripts": {
-    "start": "webpack && node ./bin/server",
+    "start": "./node_modules/.bin/webpack && node ./bin/server",
     "dev": "./node_modules/.bin/webpack-dev-server",
     "server": "node ./bin/server"
   },
